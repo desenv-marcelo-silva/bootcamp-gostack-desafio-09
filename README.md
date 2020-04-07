@@ -1,68 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+  <img alt="Fastfeet" title="Fastfeet" src="assets/logo.png" width="300px" />
+</h1>
 
-## Available Scripts
+<h3 align="center">
+  Desafio 9: FastFeet, front-end web
+</h3>
 
-In the project directory, you can run:
+<h3 align="center">
+  :warning: Etapa 3/4 do Desafio Final :warning:
+</h3>
 
-### `yarn start`
+<p>Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-end, Front-end e Mobile) que é avaliada para emissão do Certificado do Bootcamp GoStack!</p>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<blockquote align="center">“Mude você e todo o resto mudará naturalmente”!</blockquote>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafio-09?color=%2304D361" />
 
-### `yarn test`
+  <a href="https://rocketseat.com.br">
+    <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%2304D361" />
+  </a>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361" />
 
-### `yarn build`
+  <a href="https://github.com/Rocketseat/bootcamp-gostack-desafio-09/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/rocketseat/bootcamp-gostack-desafio-09?style=social" />
+  </a>
+</p>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p align="center">
+  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-entrega">Entrega</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-licença">Licença</a>
+</p>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 🚀 Sobre o desafio
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Durante esse desafio será construido front-end da aplicação FastFeet cujo o back-end foi criado durante os desafios dos módulos 02 e 03 de Node.js.
 
-### `yarn eject`
+A versão web do projeto FastFeet representa a visão da distribuidora, ou seja, todas funcionalidades presentes na versão web são para administradores. As funcionalidades para o entregador serão dispostas no aplicativo mobile.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Novas funcionalidades
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Antes de iniciar a parte web, **foram adicionadas as seguintes funcionalidades no back-end** da aplicação:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Permitir que a listagem de encomendas seja filtrada pelo nome do produto, recebendo um Query Parameter, por exemplo: `?q=Piano`.Caso o parâmetro não seja passado, retorna todas as encomendas;
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. Permitir que a listagem de entregadores seja filtrada pelo nome do entregador, recebendo um Query Parameter, por exemplo: `?q=John`. Caso o parâmetro não seja passado, retorna todos os entregadores;
 
-## Learn More
+3. Permitir que a listagem de destinatários seja filtrada pelo nome do destinatário, recebendo um Query Parameter, por exemplo: `?q=Ludwig`. Caso o parâmetro não seja passado, retorna todos os destinatários;
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Informações importantes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Ao cancelar encomendas ou deletar qualquer registro do banco foi criada uma verificação adicinal usando a função `confirm` do JavaScript;
+2. Para formatação de datas foi utilizado a biblioteca `date-fns`;
+3. No cadastro/edição de encomendas é possível buscar o entregador e o destinatário pelo nome. Usando `async` da biblioteca [React Select](https://react-select.com/home#async). As encomendas são buscadas da API assim que a página carrega e não possuem filtro.
 
-### Code Splitting
+### Opcionais
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+1. Paginação no front-end e back-end para todas listagens;
+2. Máscaras para o input de CEP;
+3. Filtro para visualizar apenas as entregas com problemas na listagem de encomendas.
 
-### Analyzing the Bundle Size
+## 🎨 Layout
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Pode-se utilizar a seguinte URL para visualizar todas as telas prototipadas/sugeridas: [Visualizar](https://xd.adobe.com/view/62e829fc-4f10-4ac8-70d2-d39b429d43ee-14d9/grid/)
 
-### Making a Progressive Web App
+## 📅 Entrega
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Esse desafio **não foi entregue** e não receberá correção por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp.
 
-### Advanced Configuration
+## 📝 Licença
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
-### Deployment
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Feito com ♥ by Marcelo Silva
 
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Inspirado nos desafios propostos com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
