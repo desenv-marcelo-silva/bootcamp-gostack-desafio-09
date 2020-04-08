@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Container } from './styles';
 
-export default function Packages() {
+export default function Home() {
   return (
     <Container>
-      <h1>Cadastro de encomendas</h1>
+      <h1>Home-Front end FastFeet</h1>
     </Container>
   );
 }
