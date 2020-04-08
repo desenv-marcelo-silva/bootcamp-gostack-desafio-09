@@ -47,6 +47,10 @@ export const Menu = styled.ul`
       &:hover {
         color: #000;
       }
+
+      &.active {
+        color: #000;
+      }
     }
   }
 `;
