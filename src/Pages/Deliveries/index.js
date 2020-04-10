@@ -2,17 +2,43 @@ import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { MdSearch, MdAdd } from 'react-icons/md';
 
-import {
-  Container,
-  TopoForm,
-  DeliveryTable,
-  DeliveryCab,
-  DeliveryRow,
-  DeliveryColumn,
-} from './styles';
+import TableDelivery from './Table';
 import TitleActiveWork from '../../components/TitleActiveWork';
+import { Container, TopoForm } from './styles';
 
 export default function Deliveries() {
+  const dataTab = [
+    {
+      status: 'Pendente',
+      id: 2,
+      product: 'Garrafa térmica 1L',
+      start_date: null,
+      canceled_at: null,
+      end_date: null,
+      signature_id: null,
+      Recipient: {
+        regiao_referencia: 'Vila Betânia - São José dos Campos/SP',
+        name: 'Aline Mendonca',
+        bairro: 'Vila Betânia',
+        cidade: 'São José dos Campos',
+        estado: 'SP',
+      },
+      Deliveryman: {
+        name: 'Aaron Rodgers',
+      },
+    },
+  ];
+
+  const headerInfo = [
+    'ID',
+    'Destinatário',
+    'Entregador',
+    'Cidade',
+    'Estado',
+    'Status',
+    'Ações',
+  ];
+
   return (
     <Container>
       <TitleActiveWork title="Gerenciando encomendas" />
@@ -36,26 +62,7 @@ export default function Deliveries() {
         </button>
       </TopoForm>
 
-      <DeliveryTable>
-        <DeliveryCab>
-          <DeliveryColumn>ID</DeliveryColumn>
-          <DeliveryColumn>Destinatário</DeliveryColumn>
-          <DeliveryColumn>Entregador</DeliveryColumn>
-          <DeliveryColumn>Cidade</DeliveryColumn>
-          <DeliveryColumn>Estado</DeliveryColumn>
-          <DeliveryColumn>Status</DeliveryColumn>
-          <DeliveryColumn>Ações</DeliveryColumn>
-        </DeliveryCab>
-        <DeliveryRow>
-          <DeliveryColumn>#01</DeliveryColumn>
-          <DeliveryColumn>Ludwig van Beethoven</DeliveryColumn>
-          <DeliveryColumn>JD jonh Doe</DeliveryColumn>
-          <DeliveryColumn>Rio do Sul</DeliveryColumn>
-          <DeliveryColumn>Santa Catarina</DeliveryColumn>
-          <DeliveryColumn>* ENTREGUE</DeliveryColumn>
-          <DeliveryColumn>...</DeliveryColumn>
-        </DeliveryRow>
-      </DeliveryTable>
+      <TableDelivery infoHeader={headerInfo} dataTable={dataTab} />
     </Container>
   );
 }
