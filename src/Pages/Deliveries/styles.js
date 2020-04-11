@@ -70,21 +70,3 @@ export const TopoForm = styled.div`
     }
   }
 `;
-
-export const DeliveryTable = styled.div`
-  display: table;
-  margin-top: 20px;
-`;
-
-export const DeliveryCab = styled.div`
-  display: table-row;
-  font-weight: bold;
-`;
-
-export const DeliveryRow = styled.div`
-  display: table-row;
-`;
-
-export const DeliveryColumn = styled.div`
-  display: table-cell;
-`;

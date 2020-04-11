@@ -10,7 +10,7 @@ import { Container, TopoForm } from './styles';
 
 const dataTab = [
   {
-    status: 'Pendente',
+    status: 'Cancelada ',
     id: 1,
     product: 'Garrafa térmica 1L',
     start_date: null,
@@ -29,7 +29,7 @@ const dataTab = [
     },
   },
   {
-    status: 'Pendente',
+    status: 'Pendente  ',
     id: 2,
     product: 'Garrafa térmica 1L',
     start_date: null,
@@ -48,7 +48,7 @@ const dataTab = [
     },
   },
   {
-    status: 'Pendente',
+    status: 'Retirada  ',
     id: 3,
     product: 'Garrafa térmica 1L',
     start_date: null,
@@ -67,7 +67,7 @@ const dataTab = [
     },
   },
   {
-    status: 'Pendente',
+    status: 'Entregue  ',
     id: 4,
     product: 'Garrafa térmica 1L',
     start_date: null,
@@ -88,9 +88,23 @@ const dataTab = [
 ];
 
 export default function Deliveries() {
+  function getStatusColor(status) {
+    switch (status.toLowerCase().trim()) {
+      case 'retirada':
+        return '#4D85EE';
+      case 'entregue':
+        return '#2CA42B';
+      case 'cancelada':
+        return '#DE3B3B';
+      default:
+        return '#C1BC35'; // pendente
+    }
+  }
+
   const data = dataTab.map((item) => ({
     ...item,
     initial: initials(item.Deliveryman.name),
+    statusColor: getStatusColor(item.status),
   }));
 
   return (

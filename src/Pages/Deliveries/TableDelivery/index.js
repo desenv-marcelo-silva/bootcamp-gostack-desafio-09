@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MdMoreHoriz } from 'react-icons/md';
 import { getColor } from 'random-material-color';
-import { Container, DeliveryName } from './styles';
+import { Container, DeliveryName, StatusDelivery } from './styles';
 
 export default function TableDelivery({ dataTable }) {
   function renderHeader() {
@@ -27,6 +27,7 @@ export default function TableDelivery({ dataTable }) {
         Recipient: { name: destinatario, cidade, estado },
         Deliveryman: { name: entregador },
         initial,
+        statusColor,
       } = info;
       return (
         <li key={id}>
@@ -35,14 +36,16 @@ export default function TableDelivery({ dataTable }) {
           <div className="deliveryman">
             <DeliveryName
               initialName={initial}
-              color={getColor({ text: id + initial })}
+              color={getColor({ text: initial })}
             >
               {entregador}
             </DeliveryName>
           </div>
           <div className="city">{cidade}</div>
           <div className="state">{estado}</div>
-          <div className="status">{status}</div>
+          <div className="status">
+            <StatusDelivery statusColor={statusColor}>{status}</StatusDelivery>
+          </div>
           <div className="action">
             <button type="button">
               <MdMoreHoriz />

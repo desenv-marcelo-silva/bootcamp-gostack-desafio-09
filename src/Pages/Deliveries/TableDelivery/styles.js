@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 
 export const Container = styled.div`
   margin-top: 20px;
@@ -84,5 +84,26 @@ export const DeliveryName = styled.span`
     padding: 5px;
     margin-right: 5px;
     background-color: ${({ color }) => lighten(0.4, color)};
+  }
+`;
+
+export const StatusDelivery = styled.span`
+  background: ${({ statusColor }) => lighten(0.2, statusColor)};
+  padding: 5px 10px;
+  border-radius: 15px;
+
+  color: ${({ statusColor }) => darken(0.2, statusColor)};
+  text-transform: uppercase;
+  font-size: 10px;
+  flex: grow;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: ${({ statusColor }) => darken(0.2, statusColor)};
+    border-radius: 50%;
+    margin-right: 5px;
   }
 `;
