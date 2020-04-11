@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const Container = styled.div`
   margin-top: 20px;
@@ -72,5 +73,16 @@ export const Container = styled.div`
       border: 0;
       background: none;
     }
+  }
+`;
+
+export const DeliveryName = styled.span`
+  &::before {
+    content: "${({ initialName }) => initialName}";
+    color: ${({ color }) => color};
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 5px;
+    background-color: ${({ color }) => lighten(0.4, color)};
   }
 `;

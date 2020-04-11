@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import initials from 'initials';
 import { MdMoreHoriz } from 'react-icons/md';
-
-import { Container } from './styles';
+import { getColor } from 'random-material-color';
+import { Container, DeliveryName } from './styles';
 
 export default function TableDelivery({ dataTable }) {
   function renderHeader() {
@@ -27,14 +26,19 @@ export default function TableDelivery({ dataTable }) {
         status,
         Recipient: { name: destinatario, cidade, estado },
         Deliveryman: { name: entregador },
+        initial,
       } = info;
       return (
-        <li id={id}>
+        <li key={id}>
           <div className="id">{`#${id}`}</div>
           <div className="recipient">{destinatario}</div>
           <div className="deliveryman">
-            <span>{initials(entregador)}</span>
-            <span>{` ${entregador}`}</span>
+            <DeliveryName
+              initialName={initial}
+              color={getColor({ text: id + initial })}
+            >
+              {entregador}
+            </DeliveryName>
           </div>
           <div className="city">{cidade}</div>
           <div className="state">{estado}</div>
