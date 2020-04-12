@@ -6,14 +6,14 @@ export const Container = styled.div`
   background: none;
 
   li {
-    padding: 10px;
+    padding: 15px 10px 15px;
+    font-size: 16px;
   }
 
   ul.table-header {
     width: 100%;
     color: #444;
     font-weight: bold;
-    font-size: 16px;
 
     li {
       display: flex;
@@ -33,7 +33,7 @@ export const Container = styled.div`
     }
 
     li:nth-child(n + 2) {
-      margin-top: 15px;
+      margin-top: 20px;
     }
   }
 
@@ -42,7 +42,7 @@ export const Container = styled.div`
   }
 
   div.recipient {
-    width: 250px;
+    width: 200px;
   }
 
   div.deliveryman {
@@ -50,7 +50,7 @@ export const Container = styled.div`
   }
 
   div.city {
-    width: 150px;
+    width: 200px;
   }
 
   div.state {
