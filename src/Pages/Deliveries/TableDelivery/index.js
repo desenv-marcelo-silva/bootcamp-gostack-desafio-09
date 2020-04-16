@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import { MdMoreHoriz, MdVisibility, MdEdit, MdDelete } from 'react-icons/md';
 import { getColor } from 'random-material-color';
-import { Container, DeliveryName, StatusDelivery, MenuAction } from './styles';
+import {
+  Container,
+  DeliveryName,
+  StatusDelivery,
+  MenuAction,
+  AvatarDeliveryman,
+} from './styles';
 
 export default function TableDelivery({ dataTable }) {
   const [idDelivery, setIdDelivery] = useState(null);
@@ -32,8 +38,12 @@ export default function TableDelivery({ dataTable }) {
         id,
         status,
         Recipient: { name: destinatario, cidade, estado },
-        Deliveryman: { name: entregador },
+        Deliveryman: {
+          name: entregador,
+          deliveryman_avatar: { url: urlAvatar },
+        },
         initial,
+        initialColor = getColor({ text: initial }),
         statusColor,
       } = info;
 
@@ -42,12 +52,18 @@ export default function TableDelivery({ dataTable }) {
           <div className="id">{`#${id}`}</div>
           <div className="recipient">{destinatario}</div>
           <div className="deliveryman">
-            <DeliveryName
-              initialName={initial}
-              color={getColor({ text: initial })}
-            >
-              {entregador}
-            </DeliveryName>
+            {urlAvatar ? (
+              <>
+                <AvatarDeliveryman>
+                  <img src={urlAvatar} alt="Avatar" />
+                  {entregador}
+                </AvatarDeliveryman>
+              </>
+            ) : (
+              <DeliveryName initialName={initial} color={initialColor}>
+                {entregador}
+              </DeliveryName>
+            )}
           </div>
           <div className="city">{cidade}</div>
           <div className="state">{estado}</div>

@@ -76,6 +76,20 @@ export const Container = styled.div`
   }
 `;
 
+export const AvatarDeliveryman = styled.div`
+  display: flex;
+  align-items: center;
+  max-height: 20px;
+
+  img {
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 5px;
+    height: 35px;
+    width: 35px;
+  }
+`;
+
 export const DeliveryName = styled.span`
   &::before {
     content: "${({ initialName }) => initialName}";

@@ -26,6 +26,11 @@ const dataTab = [
     },
     Deliveryman: {
       name: 'Aaron Rodgers',
+      deliveryman_avatar: {
+        url: 'http://127.0.0.1:2020/files/f4ceebcbb42ad90d2433cfec43404562.jpg',
+        id: 3,
+        path: 'f4ceebcbb42ad90d2433cfec43404562.jpg',
+      },
     },
   },
   {
@@ -45,6 +50,11 @@ const dataTab = [
     },
     Deliveryman: {
       name: 'Aaron Rodgers',
+      deliveryman_avatar: {
+        url: null,
+        id: null,
+        path: null,
+      },
     },
   },
   {
@@ -64,6 +74,12 @@ const dataTab = [
     },
     Deliveryman: {
       name: 'Aaron Rodgers',
+      deliveryman_avatar: {
+        url:
+          'http://127.0.0.1:2020/files/72527369101e9b91f6604ee0b0375ed2.jpeg',
+        id: 4,
+        path: '72527369101e9b91f6604ee0b0375ed2.jpeg',
+      },
     },
   },
   {
@@ -83,6 +99,12 @@ const dataTab = [
     },
     Deliveryman: {
       name: 'Aaron Rodgers',
+      deliveryman_avatar: {
+        url:
+          'http://127.0.0.1:2020/files/72527369101e9b91f6604ee0b0375ed2.jpeg',
+        id: 4,
+        path: '72527369101e9b91f6604ee0b0375ed2.jpeg',
+      },
     },
   },
 ];
