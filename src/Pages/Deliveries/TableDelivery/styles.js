@@ -15,7 +15,7 @@ export const Container = styled.div`
     color: #444;
     font-weight: bold;
 
-    li {
+    > li {
       display: flex;
       justify-content: space-between;
     }
@@ -25,14 +25,14 @@ export const Container = styled.div`
     width: 100%;
     background: none;
 
-    li {
+    > li {
       display: flex;
       justify-content: space-between;
       background: #fff;
       border-radius: 4px;
     }
 
-    li:nth-child(n + 2) {
+    > li:nth-child(n + 2) {
       margin-top: 20px;
     }
   }
@@ -105,5 +105,70 @@ export const StatusDelivery = styled.span`
     background: ${({ statusColor }) => darken(0.2, statusColor)};
     border-radius: 50%;
     margin-right: 5px;
+  }
+`;
+
+export const MenuAction = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  button {
+    font-size: 16px;
+    border: none;
+    background: none;
+    width: 100%;
+  }
+
+  ul {
+    opacity: ${(props) => (props.visible ? 1 : 0)};
+    position: absolute;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    background: #fff 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    left: calc(50% - 75px);
+    top: calc(100% + 10px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: calc(100% - 85px);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #666;
+    }
+
+    li {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 16px;
+      padding: 8px;
+      margin: 0 5px 2px 5px;
+
+      &:nth-child(-n + 2) {
+        border-bottom: 1px solid #999;
+      }
+
+      span {
+        color: #999999;
+      }
+
+      svg {
+        margin-left: 0;
+        margin-right: 10px;
+        height: 15px;
+        width: 15px;
+      }
+
+      &:hover {
+        background-color: #ddd;
+      }
+    }
   }
 `;

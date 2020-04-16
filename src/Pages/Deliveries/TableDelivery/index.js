@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { MdMoreHoriz } from 'react-icons/md';
+
+import { MdMoreHoriz, MdVisibility, MdEdit, MdDelete } from 'react-icons/md';
 import { getColor } from 'random-material-color';
-import { Container, DeliveryName, StatusDelivery } from './styles';
+import { Container, DeliveryName, StatusDelivery, MenuAction } from './styles';
 
 export default function TableDelivery({ dataTable }) {
+  const [idDelivery, setIdDelivery] = useState(null);
+
   function renderHeader() {
     return (
       <>
@@ -19,6 +22,10 @@ export default function TableDelivery({ dataTable }) {
     );
   }
 
+  function handleContextMenu(id) {
+    setIdDelivery(id === idDelivery ? null : id);
+  }
+
   function renderBody() {
     return dataTable.map((info, _) => {
       const {
@@ -29,6 +36,7 @@ export default function TableDelivery({ dataTable }) {
         initial,
         statusColor,
       } = info;
+
       return (
         <li key={id}>
           <div className="id">{`#${id}`}</div>
@@ -47,9 +55,24 @@ export default function TableDelivery({ dataTable }) {
             <StatusDelivery statusColor={statusColor}>{status}</StatusDelivery>
           </div>
           <div className="action">
-            <button type="button">
-              <MdMoreHoriz />
-            </button>
+            <MenuAction visible={id === idDelivery}>
+              <button type="button" onClick={() => handleContextMenu(id)}>
+                <MdMoreHoriz />
+              </button>
+              <ul>
+                <li>
+                  <MdVisibility color="#8E5BE8" />
+                  <span>Visualizar</span>
+                </li>
+                <li>
+                  <MdEdit color="#4D85EE" />
+                  <span>Editar</span>
+                </li>
+                <li>
+                  <MdDelete color="#DE3B3B" /> <span>Excluir</span>
+                </li>
+              </ul>
+            </MenuAction>
           </div>
         </li>
       );
