@@ -5,6 +5,5 @@ if (process.env.NODE_ENV === 'development') {
 
   tron.clear();
 
-  // eslint-disable-next-line no-console
   console.tron = tron;
 }
