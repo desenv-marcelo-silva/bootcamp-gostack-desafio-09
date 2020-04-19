@@ -4,7 +4,9 @@ import { Form, Input } from '@rocketseat/unform';
 import logo from '~/assets/logo.png';
 
 export default function SignIn() {
-  function handleSubmit({ email, password }) {}
+  function handleSubmit(data) {
+    console.log(data);
+  }
 
   return (
     <>
