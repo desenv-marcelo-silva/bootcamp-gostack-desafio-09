@@ -5,7 +5,7 @@ import { MdSearch, MdAdd } from 'react-icons/md';
 import initials from 'initials';
 
 import TableDelivery from './TableDelivery';
-import TitleActiveWork from '../../components/TitleActiveWork';
+import TitleActiveWork from '~/components/TitleActiveWork';
 import { Container, TopoForm } from './styles';
 
 const dataTab = [
