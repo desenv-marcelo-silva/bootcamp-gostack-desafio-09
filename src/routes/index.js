@@ -3,11 +3,11 @@ import { Switch } from 'react-router-dom';
 
 import Route from './Route';
 
-import SignIn from '../Pages/SignIn';
-import Deliveries from '../Pages/Deliveries';
-import DeliveryMan from '../Pages/DeliveryMan';
-import Recipients from '../Pages/Recipients';
-import Problems from '../Pages/DeliveriesProblems';
+import SignIn from '~/Pages/SignIn';
+import Deliveries from '~/Pages/Deliveries';
+import DeliveryMan from '~/Pages/DeliveryMan';
+import Recipients from '~/Pages/Recipients';
+import Problems from '~/Pages/DeliveriesProblems';
 
 export default function Routes() {
   return (

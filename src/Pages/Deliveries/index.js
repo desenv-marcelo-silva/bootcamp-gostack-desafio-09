@@ -7,7 +7,7 @@ import initials from 'initials';
 import api from '../../services/api';
 
 import TableDelivery from './TableDelivery';
-import TitleActiveWork from '../../components/TitleActiveWork';
+import TitleActiveWork from '~/components/TitleActiveWork';
 import { Container, TopoForm } from './styles';
 
 export default function Deliveries() {

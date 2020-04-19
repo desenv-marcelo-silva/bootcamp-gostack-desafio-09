@@ -1,11 +1,20 @@
 import React from 'react';
 
-import { Container } from './styles';
+import logo from '~/assets/logo.png';
 
 export default function SignIn() {
   return (
-    <Container>
-      <h1>Sigin</h1>
-    </Container>
+    <>
+      <img src={logo} alt="FastFeet" />
+
+      <form>
+        <label htmlFor="email">seu e-mail</label>
+        <input id="email" type="email" placeholder="digite seu e-mail" />
+        <label htmlFor="password">Sua senha</label>
+        <input id="password" type="password" placeholder="digite sua senha" />
+
+        <button type="submit">Acessar</button>
+      </form>
+    </>
   );
 }
