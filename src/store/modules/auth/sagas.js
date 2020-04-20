@@ -17,7 +17,7 @@ export function* signIn({ payload }) {
 
   yield put(signInSuccess(token, user));
 
-  history.push('/delivery');
+  history.push('/deliveries');
 }
 
 export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);

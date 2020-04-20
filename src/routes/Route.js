@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import store from '~/store';
+import { store } from '~/store';
 
 import AuthLayout from '~/Pages/_layouts/auth';
 import DefaultLayout from '~/Pages/_layouts/default';
