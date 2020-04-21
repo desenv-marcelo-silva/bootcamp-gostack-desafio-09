@@ -65,9 +65,10 @@ export const Identificacao = styled.div`
     margin-bottom: 10px;
   }
 
-  > a {
+  > button {
     font-size: 14px;
     color: red;
     text-transform: lowercase;
+    border: 0;
   }
 `;
