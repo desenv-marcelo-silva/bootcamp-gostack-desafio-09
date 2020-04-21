@@ -28,7 +28,7 @@ export default function Deliveries() {
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get('deliveries');
+      const response = await api.get('deliverypacks/deliveries');
 
       const dataDeliveries = response.data.map((item) => ({
         ...item,

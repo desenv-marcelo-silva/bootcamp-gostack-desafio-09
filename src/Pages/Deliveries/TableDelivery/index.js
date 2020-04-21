@@ -38,10 +38,7 @@ export default function TableDelivery({ dataTable }) {
         id,
         status,
         Recipient: { name: destinatario, cidade, estado },
-        Deliveryman: {
-          name: entregador,
-          deliveryman_avatar: { url: urlAvatar },
-        },
+        Deliveryman: { name: entregador, deliveryman_avatar: urlAvatar },
         initial,
         initialColor = getColor({ text: initial }),
         statusColor,
