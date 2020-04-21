@@ -157,7 +157,7 @@ export const MenuAction = styled.div`
       height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 10px solid #666;
+      border-bottom: 10px solid #dadfe4;
     }
 
     li {
