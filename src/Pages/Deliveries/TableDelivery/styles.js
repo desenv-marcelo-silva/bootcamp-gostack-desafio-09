@@ -69,10 +69,24 @@ export const Container = styled.div`
     width: 100px;
     text-align: center;
 
-    > button {
+    button {
       border: 0;
       background: none;
     }
+  }
+`;
+
+export const AvatarDeliveryman = styled.div`
+  display: flex;
+  align-items: center;
+  max-height: 20px;
+
+  img {
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 5px;
+    height: 35px;
+    width: 35px;
   }
 `;
 
@@ -121,15 +135,18 @@ export const MenuAction = styled.div`
   }
 
   ul {
-    opacity: ${(props) => (props.visible ? 1 : 0)};
     position: absolute;
+    left: calc(50% - 75px);
+    top: calc(100% + 5px);
     min-width: 150px;
+
+    opacity: ${(props) => (props.visible ? 1 : 0)};
+    pointer-events: ${(props) => (props.visible ? 'all' : 'none')};
+
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
-    z-index: 1;
     background: #fff 0% 0% no-repeat padding-box;
     border-radius: 4px;
-    left: calc(50% - 75px);
-    top: calc(100% + 10px);
+    z-index: 1;
 
     &::before {
       content: '';
@@ -148,10 +165,11 @@ export const MenuAction = styled.div`
       justify-content: flex-start;
       align-items: center;
       font-size: 16px;
-      padding: 8px;
-      margin: 0 5px 2px 5px;
+      padding: 5px;
+      margin: 5px;
+      line-height: 20px;
 
-      &:nth-child(-n + 2) {
+      &:not(:last-child) {
         border-bottom: 1px solid #999;
       }
 
