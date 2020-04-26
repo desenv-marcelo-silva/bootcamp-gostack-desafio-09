@@ -52,7 +52,7 @@ export default function TableDelivery({ dataTable }) {
             {urlAvatar ? (
               <>
                 <AvatarDeliveryman>
-                  <img src={urlAvatar} alt="Avatar" />
+                  <img src={urlAvatar.url} alt="Avatar" />
                   {entregador}
                 </AvatarDeliveryman>
               </>
