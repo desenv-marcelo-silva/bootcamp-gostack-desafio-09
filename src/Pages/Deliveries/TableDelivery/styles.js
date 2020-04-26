@@ -136,9 +136,9 @@ export const MenuAction = styled.div`
 
   ul {
     position: absolute;
-    left: calc(50% - 75px);
+    left: calc(50% - 61px);
     top: calc(100% + 5px);
-    min-width: 150px;
+    min-width: 125px;
 
     opacity: ${(props) => (props.visible ? 1 : 0)};
     pointer-events: ${(props) => (props.visible ? 'all' : 'none')};
@@ -152,7 +152,7 @@ export const MenuAction = styled.div`
       content: '';
       position: absolute;
       top: -10px;
-      left: calc(100% - 85px);
+      left: calc(100% - 74px);
       width: 0;
       height: 0;
       border-left: 10px solid transparent;
@@ -161,31 +161,36 @@ export const MenuAction = styled.div`
     }
 
     li {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      font-size: 16px;
-      padding: 5px;
+      padding: 2px 0 5px;
       margin: 5px;
-      line-height: 20px;
+
+      div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 16px;
+        line-height: 20px;
+        width: 100%;
+
+        button {
+          color: #999;
+          width: unset;
+        }
+
+        svg {
+          margin-left: 0;
+          margin-right: 10px;
+          height: 15px;
+          width: 15px;
+        }
+
+        &:hover {
+          background-color: #ddd;
+        }
+      }
 
       &:not(:last-child) {
         border-bottom: 1px solid #999;
-      }
-
-      span {
-        color: #999999;
-      }
-
-      svg {
-        margin-left: 0;
-        margin-right: 10px;
-        height: 15px;
-        width: 15px;
-      }
-
-      &:hover {
-        background-color: #ddd;
       }
     }
   }
