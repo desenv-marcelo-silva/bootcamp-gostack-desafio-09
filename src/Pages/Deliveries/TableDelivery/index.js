@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { MdMoreHoriz, MdVisibility, MdEdit, MdDelete } from 'react-icons/md';
 import { getColor } from 'random-material-color';
+
+import Visualization from '../Visualization';
+
 import {
   Container,
   DeliveryName,
@@ -12,7 +15,8 @@ import {
 } from './styles';
 
 export default function TableDelivery({ dataTable }) {
-  const [idDelivery, setIdDelivery] = useState(null);
+  const [idDelivery, setIdDelivery] = useState(0);
+  const [showVisualization, setShowVisualization] = useState(false);
 
   function renderHeader() {
     return (
@@ -29,7 +33,15 @@ export default function TableDelivery({ dataTable }) {
   }
 
   function handleContextMenu(id) {
-    setIdDelivery(id === idDelivery ? null : id);
+    setIdDelivery(id === idDelivery ? 0 : id);
+  }
+
+  function handleVisualization() {
+    setShowVisualization(true);
+  }
+
+  function handleCloseVisualization() {
+    setShowVisualization(false);
   }
 
   function renderBody() {
@@ -37,12 +49,17 @@ export default function TableDelivery({ dataTable }) {
       const {
         id,
         status,
-        Recipient: { name: destinatario, cidade, estado },
-        Deliveryman: { name: entregador, deliveryman_avatar: urlAvatar },
         initial,
         initialColor = getColor({ text: initial }),
         statusColor,
       } = info;
+
+      const {
+        name: entregador,
+        deliveryman_avatar: urlAvatar,
+      } = info.Deliveryman;
+
+      const { name: destinatario, cidade, estado } = info.Recipient;
 
       return (
         <li key={id}>
@@ -74,15 +91,24 @@ export default function TableDelivery({ dataTable }) {
               </button>
               <ul>
                 <li>
-                  <MdVisibility color="#8E5BE8" />
-                  <span>Visualizar</span>
+                  <div>
+                    <MdVisibility color="#8E5BE8" />
+                    <button type="button" onClick={handleVisualization}>
+                      Visualizar
+                    </button>
+                  </div>
                 </li>
                 <li>
-                  <MdEdit color="#4D85EE" />
-                  <span>Editar</span>
+                  <div>
+                    <MdEdit color="#4D85EE" />
+                    <button type="button">Editar</button>
+                  </div>
                 </li>
                 <li>
-                  <MdDelete color="#DE3B3B" /> <span>Excluir</span>
+                  <div>
+                    <MdDelete color="#DE3B3B" />
+                    <button type="button">Excluir</button>
+                  </div>
                 </li>
               </ul>
             </MenuAction>
@@ -94,6 +120,11 @@ export default function TableDelivery({ dataTable }) {
 
   return (
     <Container>
+      <Visualization
+        visible={showVisualization}
+        handleCloseVisualization={handleCloseVisualization}
+        idDelivery={idDelivery}
+      />
       <ul className="table-header">
         <li key="1">{renderHeader()}</li>
       </ul>
