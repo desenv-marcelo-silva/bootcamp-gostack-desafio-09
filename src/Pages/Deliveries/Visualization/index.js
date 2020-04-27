@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import fakeSignature from '~/assets/fake-signature-2.png';
+import api from '~/services/api';
+
 import {
   Container,
   Delivery,
@@ -15,40 +16,84 @@ export default function Visualization({
   visible,
   handleCloseVisualization,
 }) {
+  const [info, setInfo] = useState({});
+
+  useEffect(() => {
+    async function loadInfo() {
+      if (visible) {
+        const response = await api.get(
+          `/deliverypacks/2/package/${idDelivery}`
+        );
+
+        setInfo(response.data);
+      }
+    }
+    loadInfo();
+  }, [idDelivery, visible]);
+
+  const { rua, numero, bairro, cidade, estado, cep } = info.Recipient || {};
+
   return (
-    true && (
+    visible && (
       <Container>
         <Delivery>
           <Information>
             <strong>Informações da encomenda</strong>
-            <span>Rua Beethoven, 1729</span>
-            <span>Diadema - SP</span>
-            <span>09960-580</span>
+            <span>{`${rua}, ${numero}-${bairro}`}</span>
+            <span>{`${cidade}-${estado}`}</span>
+            <span>{cep}</span>
           </Information>
+
           <Dates>
-            <table>
-              <caption>Datas</caption>
-              <tbody>
-                <tr>
-                  <td>
-                    <span>Retirada:</span>
-                  </td>
-                  <td>25/01/2020</td>
-                </tr>
-                <tr>
-                  <td>
-                    <span>Entrega :</span>
-                  </td>
-                  <td>05/02/2020</td>
-                </tr>
-              </tbody>
-            </table>
+            <span>Datas</span>
+
+            {info.start_date || info.end_date || info.canceled_at ? (
+              <table>
+                <tbody>
+                  {info.start.date && (
+                    <tr>
+                      <td>
+                        <span>Retirada :</span>
+                      </td>
+                      <td>{info.start_date}</td>
+                    </tr>
+                  )}
+                  {info.end_date && (
+                    <tr>
+                      <td>
+                        <span>Entrega :</span>
+                      </td>
+                      <td>{info.end_date}</td>
+                    </tr>
+                  )}
+                  {info.canceled_at && (
+                    <tr>
+                      <td>
+                        <span>Cancelada:</span>
+                      </td>
+                      <td>{info.canceled_at}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            ) : (
+              <span>
+                <br />
+                <br />
+              </span>
+            )}
           </Dates>
           <SignatureImage>
             <strong>Assinatura do destinatário</strong>
-            <img src={fakeSignature} alt="Assinatura do destinatário" />
+            {info.signature ? (
+              <img src={info.signature.url} alt="Assinatura do destinatário" />
+            ) : (
+              <span> </span>
+            )}
           </SignatureImage>
-          <button type="button">Fechar</button>
+          <button type="button" onClick={handleCloseVisualization}>
+            Fechar
+          </button>
         </Delivery>
       </Container>
     )

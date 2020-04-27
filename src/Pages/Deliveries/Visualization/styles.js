@@ -61,7 +61,7 @@ export const Dates = styled.div`
   flex-direction: column;
   margin: 10px;
 
-  table caption {
+  > span {
     text-align: left;
     font-weight: bold;
     margin-left: 2px;
@@ -85,5 +85,9 @@ export const SignatureImage = styled.div`
     height: 100px;
     width: 50%;
     margin: 0 auto;
+  }
+
+  span {
+    height: 100px;
   }
 `;
