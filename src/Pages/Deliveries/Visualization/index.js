@@ -13,6 +13,7 @@ import {
 
 export default function Visualization({
   idDelivery,
+  idDeliveryman,
   visible,
   handleCloseVisualization,
 }) {
@@ -22,7 +23,7 @@ export default function Visualization({
     async function loadInfo() {
       if (visible) {
         const response = await api.get(
-          `/deliverypacks/2/package/${idDelivery}`
+          `/deliverypacks/${idDeliveryman}/package/${idDelivery}`
         );
 
         setInfo(response.data);
@@ -102,6 +103,7 @@ export default function Visualization({
 
 Visualization.propTypes = {
   idDelivery: PropTypes.number.isRequired,
+  idDeliveryman: PropTypes.number.isRequired,
   visible: PropTypes.bool.isRequired,
   handleCloseVisualization: PropTypes.func.isRequired,
 };

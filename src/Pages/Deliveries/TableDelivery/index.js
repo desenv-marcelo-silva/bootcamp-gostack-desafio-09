@@ -16,6 +16,7 @@ import {
 
 export default function TableDelivery({ dataTable }) {
   const [idDelivery, setIdDelivery] = useState(0);
+  const [idDeliveryman, setIdDeliveryman] = useState(0);
   const [showVisualization, setShowVisualization] = useState(false);
 
   function renderHeader() {
@@ -32,8 +33,9 @@ export default function TableDelivery({ dataTable }) {
     );
   }
 
-  function handleContextMenu(id) {
+  function handleContextMenu(id, deliverymanId) {
     setIdDelivery(id === idDelivery ? 0 : id);
+    setIdDeliveryman(deliverymanId);
   }
 
   function handleVisualization() {
@@ -55,6 +57,7 @@ export default function TableDelivery({ dataTable }) {
       } = info;
 
       const {
+        id: deliverymanId,
         name: entregador,
         deliveryman_avatar: urlAvatar,
       } = info.Deliveryman;
@@ -86,7 +89,10 @@ export default function TableDelivery({ dataTable }) {
           </div>
           <div className="action">
             <MenuAction visible={id === idDelivery}>
-              <button type="button" onClick={() => handleContextMenu(id)}>
+              <button
+                type="button"
+                onClick={() => handleContextMenu(id, deliverymanId)}
+              >
                 <MdMoreHoriz />
               </button>
               <ul>
@@ -124,6 +130,7 @@ export default function TableDelivery({ dataTable }) {
         visible={showVisualization}
         handleCloseVisualization={handleCloseVisualization}
         idDelivery={idDelivery}
+        idDeliveryman={idDeliveryman}
       />
       <ul className="table-header">
         <li key="1">{renderHeader()}</li>
