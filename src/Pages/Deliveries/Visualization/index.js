@@ -30,7 +30,7 @@ export default function Visualization({
       }
     }
     loadInfo();
-  }, [idDelivery, visible]);
+  }, [idDeliveryman, idDelivery, visible]);
 
   const { rua, numero, bairro, cidade, estado, cep } = info.Recipient || {};
 
