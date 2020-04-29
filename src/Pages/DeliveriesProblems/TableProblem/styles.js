@@ -100,31 +100,35 @@ export const MenuAction = styled.div`
     }
 
     li {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      font-size: 16px;
       padding: 5px;
       margin: 5px;
-      line-height: 20px;
+
+      div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 16px;
+        line-height: 20px;
+
+        button {
+          color: #999;
+          width: unset;
+        }
+
+        svg {
+          margin-left: 0;
+          margin-right: 10px;
+          height: 15px;
+          width: 15px;
+        }
+
+        &:hover {
+          background-color: #ddd;
+        }
+      }
 
       &:not(:last-child) {
         border-bottom: 1px solid #999;
-      }
-
-      span {
-        color: #999999;
-      }
-
-      svg {
-        margin-left: 0;
-        margin-right: 10px;
-        height: 15px;
-        width: 15px;
-      }
-
-      &:hover {
-        background-color: #ddd;
       }
     }
   }

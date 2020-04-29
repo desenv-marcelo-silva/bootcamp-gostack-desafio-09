@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { MdMoreHoriz, MdVisibility, MdDelete } from 'react-icons/md';
+
+import VisualizationProblems from '../VisualizationProblems';
+
 import { Container, MenuAction } from './styles';
 
 export default function TableProblem({ dataTable }) {
-  const [idProblem, setIdProblem] = useState(null);
+  const [idPackage, setIdPackage] = useState(0);
+  const [showVisualization, setShowVisualization] = useState(false);
+
+  function handleVisualization() {
+    setShowVisualization(true);
+  }
+
+  function handleCloseVisualization() {
+    setShowVisualization(false);
+  }
 
   function renderHeader() {
     return (
@@ -18,7 +30,7 @@ export default function TableProblem({ dataTable }) {
   }
 
   function handleContextMenu(id) {
-    setIdProblem(id === idProblem ? null : id);
+    setIdPackage(id === idPackage ? 0 : id);
   }
 
   function renderBody() {
@@ -32,17 +44,26 @@ export default function TableProblem({ dataTable }) {
             <span>{DeliveryProblem.description}</span>
           </td>
           <td className="action">
-            <MenuAction visible={id === idProblem}>
+            <MenuAction visible={id === idPackage}>
               <button type="button" onClick={() => handleContextMenu(id)}>
                 <MdMoreHoriz />
               </button>
               <ul>
                 <li>
-                  <MdVisibility color="#4D85EE" />
-                  <span>Visualizar</span>
+                  <div>
+                    <MdVisibility color="#4D85EE" />
+                    <button type="button" onClick={handleVisualization}>
+                      Visualizar
+                    </button>
+                  </div>
                 </li>
                 <li>
-                  <MdDelete color="#DE3B3B" /> <span>Cancelar encomenda</span>
+                  <div>
+                    <MdDelete color="#DE3B3B" />
+                    <button type="button" onClick={() => {}}>
+                      Cancelar encomenda
+                    </button>
+                  </div>
                 </li>
               </ul>
             </MenuAction>
@@ -54,6 +75,11 @@ export default function TableProblem({ dataTable }) {
 
   return (
     <Container>
+      <VisualizationProblems
+        idPackage={idPackage}
+        visible={showVisualization}
+        handleCloseVisualizationProblems={handleCloseVisualization}
+      />
       <table>
         <thead>{renderHeader()}</thead>
         <tbody>{renderBody()}</tbody>
