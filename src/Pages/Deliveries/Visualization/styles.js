@@ -16,6 +16,17 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const Delivery = styled.div`
+  background: rgba(255, 255, 255, 1);
+  height: 375px;
+  width: 450px;
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+  color: #444;
 
   button {
     width: 40%;
@@ -32,17 +43,6 @@ export const Container = styled.div`
       font-weight: 400;
     }
   }
-`;
-
-export const Delivery = styled.div`
-  background: rgba(255, 255, 255, 1);
-  height: 375px;
-  width: 450px;
-  border-radius: 4px;
-
-  display: flex;
-  flex-direction: column;
-  color: #444;
 `;
 
 export const Information = styled.div`
