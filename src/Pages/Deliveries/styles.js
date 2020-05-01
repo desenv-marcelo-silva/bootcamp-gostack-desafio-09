@@ -5,7 +5,7 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const TopoForm = styled.div`
+export const TopoActionArea = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +47,7 @@ export const TopoForm = styled.div`
     }
   }
 
-  button {
+  a {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -67,6 +67,10 @@ export const TopoForm = styled.div`
     svg {
       width: 20px;
       height: 20px;
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 `;

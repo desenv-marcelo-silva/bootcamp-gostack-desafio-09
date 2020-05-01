@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Form, Input } from '@rocketseat/unform';
 import { MdSearch, MdAdd } from 'react-icons/md';
 
@@ -9,7 +11,7 @@ import api from '../../services/api';
 import TableDelivery from './TableDelivery';
 
 import TitleActiveWork from '~/components/TitleActiveWork';
-import { Container, TopoForm } from './styles';
+import { Container, TopoActionArea } from './styles';
 
 export default function Deliveries() {
   const [data, setData] = useState([]);
@@ -46,7 +48,7 @@ export default function Deliveries() {
   return (
     <Container>
       <TitleActiveWork title="Gerenciando encomendas" />
-      <TopoForm>
+      <TopoActionArea>
         <Form onSubmit={() => {}}>
           <div>
             <span>
@@ -60,11 +62,11 @@ export default function Deliveries() {
           </div>
         </Form>
 
-        <button type="button">
+        <Link to="/delivery">
           <MdAdd />
           <span>CADASTRAR</span>
-        </button>
-      </TopoForm>
+        </Link>
+      </TopoActionArea>
 
       <TableDelivery dataTable={data} />
     </Container>
