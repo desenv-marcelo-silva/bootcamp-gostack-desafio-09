@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { MdMoreHoriz, MdVisibility, MdEdit, MdDelete } from 'react-icons/md';
 import { getColor } from 'random-material-color';
@@ -107,7 +108,7 @@ export default function TableDelivery({ dataTable }) {
                 <li>
                   <div>
                     <MdEdit color="#4D85EE" />
-                    <button type="button">Editar</button>
+                    <Link to={`/delivery/${idDelivery}`}>Editar</Link>
                   </div>
                 </li>
                 <li>

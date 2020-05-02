@@ -62,7 +62,7 @@ export default function Deliveries() {
           </div>
         </Form>
 
-        <Link to="/delivery">
+        <Link to="/delivery/0">
           <MdAdd />
           <span>CADASTRAR</span>
         </Link>

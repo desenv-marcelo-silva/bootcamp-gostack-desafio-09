@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdCheck } from 'react-icons/md';
-import { Form, Input, Select } from '@rocketseat/unform';
+import { Form, Input } from '@rocketseat/unform';
+import { useParams } from 'react-router-dom';
+
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
@@ -19,9 +21,12 @@ const schema = Yup.object().shape({
   ),
   product: Yup.string().required('É obrigatório informar o nome do produto.'),
 });
+
 export default function Delivery() {
+  const { idPackage } = useParams();
   const [recipients, setRecipients] = useState([]);
   const [deliveryman, setDeliveryman] = useState([]);
+  const [currPackage, setCurrPackage] = useState({});
 
   useEffect(() => {
     async function load() {
@@ -37,15 +42,25 @@ export default function Delivery() {
         title: delvman.name,
       }));
 
+      if (idPackage > 0) {
+        const packageInfo = await api.get(`packages/package/${idPackage}`);
+
+        setCurrPackage({
+          deliveryman_id: packageInfo.data.deliveryman_id,
+          recipient_id: packageInfo.data.recipient_id,
+          product: packageInfo.data.product,
+        });
+      }
+
       setRecipients(dataRcp);
       setDeliveryman(dataDlv);
     }
 
     load();
-  }, []);
+  }, [idPackage]);
 
   // eslint-disable-next-line camelcase
-  async function saveData({ recipient_id, deliveryman_id, product }) {
+  async function createData({ recipient_id, deliveryman_id, product }) {
     try {
       const response = await api.post('packages', {
         recipient_id,
@@ -66,8 +81,35 @@ export default function Delivery() {
     }
   }
 
+  // eslint-disable-next-line camelcase
+  async function updateData({ recipient_id, deliveryman_id, product }) {
+    try {
+      const response = await api.put('packages', {
+        id: idPackage,
+        recipient_id,
+        deliveryman_id,
+        product,
+      });
+      if (!response.id) {
+        throw Error('Erro ao gravar as informações. Verifique seus dados.');
+      }
+    } catch (error) {
+      toast.error(
+        'Não foi possível gravar as informações. Verifique seus dados.'
+      );
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
+    }
+  }
+
   function handleSubmit(params) {
-    saveData(params);
+    if (idPackage === 0) {
+      createData(params);
+    } else {
+      updateData(params);
+    }
   }
 
   return (
@@ -92,20 +134,27 @@ export default function Delivery() {
             <div className="form-input-area-line-1">
               <label htmlFor="recipient">
                 Destinatário
-                <Select
-                  name="recipient_id"
-                  placeholder="Selecione um destinatário..."
-                  options={recipients}
-                />
+                <select name="recipient_id">
+                  {recipients.map((recipient) => (
+                    <option key={recipient.id} value={recipient.id}>
+                      {recipient.title}
+                    </option>
+                  ))}
+                </select>
               </label>
 
               <label htmlFor="deliveryman">
                 Entregador
-                <Select
+                <select
                   name="deliveryman_id"
-                  placeholder="Selecione um entregador..."
-                  options={deliveryman}
-                />
+                  defaultValue={currPackage.deliveryman_id}
+                >
+                  {deliveryman.map((delivery) => (
+                    <option key={delivery.id} value={delivery.id}>
+                      {delivery.title}
+                    </option>
+                  ))}
+                </select>
               </label>
             </div>
 
