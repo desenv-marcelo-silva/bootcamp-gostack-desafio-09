@@ -71,12 +71,18 @@ export const FormArea = styled.div`
     div.form-input-area {
       background: #fff;
       padding: 30px 0 30px 30px;
+      border-radius: 4px;
     }
 
     label {
       color: #444;
       font-weight: 700;
       font-size: 14px;
+
+      > span {
+        color: #ff4141;
+        display: block;
+      }
     }
 
     div.form-input-area-line-1 {
@@ -88,6 +94,7 @@ export const FormArea = styled.div`
         width: 50%;
 
         > select {
+          margin-top: 5px;
           width: 90%;
           height: 40px;
           font-size: 16px;
