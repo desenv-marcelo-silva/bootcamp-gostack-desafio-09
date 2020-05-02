@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@rocketseat/unform": "^1.6.2",
+    "@rocketseat/unform": "1.6.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -22,7 +22,6 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-select": "^3.1.0",
     "react-toastify": "^5.5.0",
     "reactotron-react-js": "^3.3.7",
     "reactotron-redux": "^3.1.3",
