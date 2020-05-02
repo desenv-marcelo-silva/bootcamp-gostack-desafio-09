@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { format, parseISO } from 'date-fns';
 
 import api from '~/services/api';
 
@@ -51,12 +52,12 @@ export default function Visualization({
             {info.start_date || info.end_date || info.canceled_at ? (
               <table>
                 <tbody>
-                  {info.start.date && (
+                  {info.start_date && (
                     <tr>
                       <td>
                         <span>Retirada :</span>
                       </td>
-                      <td>{info.start_date}</td>
+                      <td>{format(parseISO(info.start_date), 'dd/MM/yyyy')}</td>
                     </tr>
                   )}
                   {info.end_date && (
@@ -64,7 +65,7 @@ export default function Visualization({
                       <td>
                         <span>Entrega :</span>
                       </td>
-                      <td>{info.end_date}</td>
+                      <td>{format(parseISO(info.end_date), 'dd/MM/yyyy')}</td>
                     </tr>
                   )}
                   {info.canceled_at && (
@@ -72,7 +73,9 @@ export default function Visualization({
                       <td>
                         <span>Cancelada:</span>
                       </td>
-                      <td>{info.canceled_at}</td>
+                      <td>
+                        {format(parseISO(info.canceled_at), 'dd/MM/yyyy')}
+                      </td>
                     </tr>
                   )}
                 </tbody>
