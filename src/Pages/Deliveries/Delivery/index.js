@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdCheck } from 'react-icons/md';
-import { Form, Input } from '@rocketseat/unform';
+import { Form, Input, Select } from '@rocketseat/unform';
 import { useParams } from 'react-router-dom';
 
 import * as Yup from 'yup';
@@ -13,12 +13,12 @@ import api from '~/services/api';
 import { Container, Topo, FormArea } from './styles';
 
 const schema = Yup.object().shape({
-  recipient_id: Yup.number().required(
-    'É obrigatório informar um destinatário.'
-  ),
-  deliveryman_id: Yup.number().required(
-    'É obrigatório informar um entregador.'
-  ),
+  recipient_id: Yup.number()
+    .positive('É obrigatório informar um destinatário.')
+    .required('É obrigatório informar um destinatário.'),
+  deliveryman_id: Yup.number()
+    .positive('É obrigatório informar um entregador.')
+    .required('É obrigatório informar um entregador.'),
   product: Yup.string().required('É obrigatório informar o nome do produto.'),
 });
 
@@ -26,7 +26,9 @@ export default function Delivery() {
   const { idPackage } = useParams();
   const [recipients, setRecipients] = useState([]);
   const [deliveryman, setDeliveryman] = useState([]);
-  const [currPackage, setCurrPackage] = useState({});
+  const [deliverymanValue, setDeliverymanValue] = useState(-1);
+  const [recipientValue, setRecipientValue] = useState(-1);
+  const [productValue, setProductValue] = useState('');
 
   useEffect(() => {
     async function load() {
@@ -45,11 +47,12 @@ export default function Delivery() {
       if (idPackage > 0) {
         const packageInfo = await api.get(`packages/package/${idPackage}`);
 
-        setCurrPackage({
-          deliveryman_id: packageInfo.data.deliveryman_id,
-          recipient_id: packageInfo.data.recipient_id,
-          product: packageInfo.data.product,
-        });
+        setDeliverymanValue(packageInfo.data.deliveryman_id);
+        setRecipientValue(packageInfo.data.recipient_id);
+        setProductValue(packageInfo.data.product);
+      } else {
+        dataRcp.unshift({ id: -1, title: 'Selecione um destinatário...' });
+        dataDlv.unshift({ id: -1, title: 'Selecione um entregador...' });
       }
 
       setRecipients(dataRcp);
@@ -90,7 +93,7 @@ export default function Delivery() {
         deliveryman_id,
         product,
       });
-      if (!response.id) {
+      if (!response.data.id) {
         throw Error('Erro ao gravar as informações. Verifique seus dados.');
       }
     } catch (error) {
@@ -132,36 +135,39 @@ export default function Delivery() {
 
           <div className="form-input-area">
             <div className="form-input-area-line-1">
-              <label htmlFor="recipient">
+              <label htmlFor="recipient_id">
                 Destinatário
-                <select name="recipient_id">
-                  {recipients.map((recipient) => (
-                    <option key={recipient.id} value={recipient.id}>
-                      {recipient.title}
-                    </option>
-                  ))}
-                </select>
+                <Select
+                  name="recipient_id"
+                  value={recipientValue}
+                  defaultValue
+                  options={recipients}
+                  onChange={(e) => setRecipientValue(e.target.value)}
+                />
               </label>
 
-              <label htmlFor="deliveryman">
+              <label htmlFor="deliveryman_id">
                 Entregador
-                <select
+                <Select
                   name="deliveryman_id"
-                  defaultValue={currPackage.deliveryman_id}
-                >
-                  {deliveryman.map((delivery) => (
-                    <option key={delivery.id} value={delivery.id}>
-                      {delivery.title}
-                    </option>
-                  ))}
-                </select>
+                  value={deliverymanValue}
+                  defaultValue={{ deliverymanValue }}
+                  options={deliveryman}
+                  onChange={(e) => setDeliverymanValue(e.target.value)}
+                />
               </label>
             </div>
 
             <div className="form-input-area-line-2">
               <label htmlFor="product">
                 Nome do produto
-                <Input type="text" id="product" name="product" />
+                <Input
+                  type="text"
+                  id="product"
+                  name="product"
+                  value={productValue}
+                  onChange={(e) => setProductValue(e.target.value)}
+                />
               </label>
             </div>
           </div>
