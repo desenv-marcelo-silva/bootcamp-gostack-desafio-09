@@ -57,7 +57,7 @@ export default function Deliveries() {
             <Input
               type="text"
               name="filtro"
-              placeholder="Busca por encomendas"
+              placeholder="Buscar por encomendas"
             />
           </div>
         </Form>

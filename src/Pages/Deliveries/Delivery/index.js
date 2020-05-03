@@ -70,8 +70,9 @@ export default function Delivery() {
         deliveryman_id,
         product,
       });
-      if (!response.id) {
-        throw Error('Erro ao gravar as informações. Verifique seus dados.');
+      console.tron.log(response);
+      if (response.data.id > 0) {
+        toast.success('Dados gravados com sucesso.');
       }
     } catch (error) {
       toast.error(
@@ -93,8 +94,8 @@ export default function Delivery() {
         deliveryman_id,
         product,
       });
-      if (!response.data.id) {
-        throw Error('Erro ao gravar as informações. Verifique seus dados.');
+      if (response.data.id > 0) {
+        toast.success('Dados gravados com sucesso.');
       }
     } catch (error) {
       toast.error(
@@ -108,7 +109,7 @@ export default function Delivery() {
   }
 
   function handleSubmit(params) {
-    if (idPackage === 0) {
+    if (Number(idPackage) === 0) {
       createData(params);
     } else {
       updateData(params);
@@ -120,7 +121,9 @@ export default function Delivery() {
       <FormArea>
         <Form schema={schema} onSubmit={handleSubmit}>
           <Topo>
-            <h2>Cadastro de encomendas</h2>
+            <h2>{`${
+              idPackage > 0 ? 'Alteração' : 'Cadastro'
+            } de encomendas`}</h2>
             <div>
               <button type="button" onClick={() => history.goBack()}>
                 <MdChevronLeft size={20} />
