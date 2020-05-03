@@ -70,7 +70,7 @@ export default function Delivery() {
         deliveryman_id,
         product,
       });
-      console.tron.log(response);
+
       if (response.data.id > 0) {
         toast.success('Dados gravados com sucesso.');
       }
