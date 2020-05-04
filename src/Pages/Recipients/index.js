@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Form } from '@rocketseat/unform';
 import { MdSearch, MdAdd } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -53,10 +54,10 @@ export default function Recipients() {
           </div>
         </Form>
 
-        <button type="button">
+        <Link to="/recipient/0">
           <MdAdd />
           <span>CADASTRAR</span>
-        </button>
+        </Link>
       </TopoForm>
 
       <TableRecipient dataTable={data} />

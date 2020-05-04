@@ -10,6 +10,7 @@ import Recipients from '~/Pages/Recipients';
 import Problems from '~/Pages/DeliveriesProblems';
 import Delivery from '~/Pages/Deliveries/Delivery';
 import Deliverymen from '~/Pages/DeliveryMan/Deliverymen';
+import Recipient from '~/Pages/Recipients/Recipient';
 
 export default function Routes() {
   return (
@@ -26,6 +27,7 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/delivery/:idPackage" component={Delivery} isPrivate />
+      <Route path="/recipient/:idRecipient" component={Recipient} isPrivate />
     </Switch>
   );
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 import { MdMoreHoriz, MdEdit, MdDelete } from 'react-icons/md';
@@ -42,8 +44,10 @@ export default function TableRecipient({ dataTable }) {
               </button>
               <ul>
                 <li>
-                  <MdEdit color="#4D85EE" />
-                  <span>Editar</span>
+                  <div>
+                    <MdEdit color="#4D85EE" />
+                    <Link to={`/recipient/${idRecipient}`}>Editar</Link>
+                  </div>
                 </li>
                 <li>
                   <MdDelete color="#DE3B3B" /> <span>Excluir</span>
