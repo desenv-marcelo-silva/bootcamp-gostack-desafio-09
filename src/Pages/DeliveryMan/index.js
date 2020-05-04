@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Form } from '@rocketseat/unform';
 import { MdSearch, MdAdd } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import initials from 'initials';
 import api from '../../services/api';
@@ -19,7 +20,7 @@ export default function Deliveryman() {
 
       const dataDeliveryman = response.data.map((item) => ({
         ...item,
-        initial: initials(item.name),
+        initial: initials(item.name).substring(0, 2),
       }));
 
       setData(dataDeliveryman);
@@ -40,15 +41,15 @@ export default function Deliveryman() {
             <Input
               type="text"
               name="filtro"
-              placeholder="Busca por entregadores"
+              placeholder="Buscar por entregadores"
             />
           </div>
         </Form>
 
-        <button type="button">
+        <Link to="/deliverymen/0">
           <MdAdd />
           <span>CADASTRAR</span>
-        </button>
+        </Link>
       </TopoForm>
 
       <TableDeliveryman dataTable={data} />

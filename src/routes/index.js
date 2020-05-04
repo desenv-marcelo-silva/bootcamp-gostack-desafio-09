@@ -9,6 +9,7 @@ import DeliveryMan from '~/Pages/DeliveryMan';
 import Recipients from '~/Pages/Recipients';
 import Problems from '~/Pages/DeliveriesProblems';
 import Delivery from '~/Pages/Deliveries/Delivery';
+import Deliverymen from '~/Pages/DeliveryMan/Deliverymen';
 
 export default function Routes() {
   return (
@@ -19,6 +20,11 @@ export default function Routes() {
       <Route path="/recipients" component={Recipients} isPrivate />
       <Route path="/problems" component={Problems} isPrivate />
       <Route path="/deliverymans" component={DeliveryMan} isPrivate />
+      <Route
+        path="/deliverymen/:idDeliveryman"
+        component={Deliverymen}
+        isPrivate
+      />
       <Route path="/delivery/:idPackage" component={Delivery} isPrivate />
     </Switch>
   );

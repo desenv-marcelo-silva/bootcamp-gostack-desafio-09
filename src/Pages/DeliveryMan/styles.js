@@ -47,7 +47,7 @@ export const TopoForm = styled.div`
     }
   }
 
-  button {
+  a {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
