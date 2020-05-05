@@ -12,34 +12,37 @@ import api from '~/services/api';
 
 import { Container, Topo, FormArea } from './styles';
 
+const CEPRegex = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
 const schema = Yup.object().shape({
-  name: Yup.string().required('É obrigatório informar o nome.'),
-  email: Yup.string().email().required('É obrigatório informar o e-mail.'),
+  name: Yup.string().required('O campo nome é obrigatório.'),
+  rua: Yup.string().required('O campo rua é obrigatório.'),
+  numero: Yup.string().required('O campo número é obrigatório.'),
+  bairro: Yup.string().required('O campo bairro é obrigatório.'),
+  cidade: Yup.string().required('O campo cidade é obrigatório.'),
+  complemento: Yup.string(),
+  estado: Yup.string().required('O campo estado é obrigaório.'),
+  cep: Yup.string().matches(CEPRegex),
 });
 
 export default function Recipient() {
   const { idRecipient } = useParams();
-  const [nameValue, setNameValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
+  const [recipient, setRecipient] = useState({});
 
   useEffect(() => {
     async function load() {
-      const response = await api.get(`/deliveryman/${idRecipient}`);
-      const { name, email } = response.data;
-      setNameValue(name);
-      setEmailValue(email);
+      if (idRecipient > 0) {
+        const response = await api.get(`/recipients/${idRecipient}`);
+        setRecipient(response.data[0]);
+      }
     }
 
     load();
   }, []);
 
   // eslint-disable-next-line camelcase
-  async function createData({ name, email }) {
+  async function createData(recipientData) {
     try {
-      const response = await api.post('deliveryman', {
-        name,
-        email,
-      });
+      const response = await api.post('recipients', recipientData);
 
       if (response.data.id > 0) {
         toast.success('Dados gravados com sucesso.');
@@ -56,11 +59,11 @@ export default function Recipient() {
   }
 
   // eslint-disable-next-line camelcase
-  async function updateData({ name, email }) {
+  async function updateData(recipientData) {
     try {
-      const response = await api.put(`deliveryman/${idRecipient}`, {
-        name,
-        email,
+      const response = await api.put(`recipients`, {
+        id: idRecipient,
+        ...recipientData,
       });
       if (response.data.id > 0) {
         toast.success('Dados gravados com sucesso.');
@@ -87,7 +90,7 @@ export default function Recipient() {
   return (
     <Container>
       <FormArea>
-        <Form schema={schema} onSubmit={handleSubmit}>
+        <Form schema={schema} onSubmit={handleSubmit} initialData={recipient}>
           <Topo>
             <h2>{`${
               idRecipient > 0 ? 'Alteração' : 'Cadastro'
@@ -105,20 +108,44 @@ export default function Recipient() {
           </Topo>
 
           <div className="area-edicao">
-            <label htmlFor="name">Nome</label>
-            <Input
-              type="text"
-              name="name"
-              value={nameValue}
-              onChange={(e) => setNameValue(e.target.value)}
-            />
-            <label htmlFor="deliveryman_id">e-Mail</label>
-            <Input
-              type="email"
-              name="email"
-              value={emailValue}
-              onChange={(e) => setEmailValue(e.target.value)}
-            />
+            <div className="area-edicao__name">
+              <label htmlFor="name">Nome</label>
+              <Input type="text" name="name" />
+            </div>
+            <div className="area-edicao__rua">
+              <label htmlFor="rua">
+                Rua
+                <Input type="text" name="rua" />
+              </label>
+              <label htmlFor="numero">
+                Número
+                <Input type="text" name="numero" />
+              </label>
+              <label htmlFor="bairro">
+                Bairro
+                <Input type="text" name="bairro" />
+              </label>
+
+              <label htmlFor="complemento">
+                Complemento
+                <Input type="text" name="complemento" />
+              </label>
+            </div>
+
+            <div className="area-edicao__cidade">
+              <label htmlFor="cidade">
+                Cidade
+                <Input type="text" name="cidade" />
+              </label>
+              <label htmlFor="estado">
+                Estado
+                <Input type="text" name="estado" />
+              </label>
+              <label htmlFor="cep">
+                CEP
+                <Input type="text" name="cep" />
+              </label>
+            </div>
           </div>
         </Form>
       </FormArea>

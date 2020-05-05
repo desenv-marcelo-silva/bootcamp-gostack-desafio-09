@@ -70,13 +70,48 @@ export const FormArea = styled.div`
 
     div.area-edicao {
       background: #fff;
-      padding: 30px 0 30px 30px;
+      padding: 30px;
       border-radius: 4px;
       display: flex;
       flex-direction: column;
-      > span {
+
+      span {
         color: #ff4141;
         display: block;
+      }
+
+      & .area-edicao__rua {
+        display: flex;
+        justify-content: space-between;
+
+        > label:first-child {
+          width: 40%;
+        }
+
+        > label:nth-child(2) {
+          width: 10%;
+        }
+
+        > label:last-child {
+          width: 20%;
+        }
+      }
+
+      & .area-edicao__cidade {
+        display: flex;
+        justify-content: space-between;
+
+        > label:first-child {
+          width: 55%;
+        }
+
+        > label {
+          width: 25%;
+        }
+
+        > label:last-child {
+          width: 15%;
+        }
       }
     }
 
@@ -85,16 +120,17 @@ export const FormArea = styled.div`
       font-weight: 700;
       font-size: 14px;
       margin: 5px 0 5px;
+      display: block;
     }
 
     input {
-      width: 95%;
       border-radius: 4px;
       border: 1px solid #ccc;
       line-height: 40px;
       font-size: 16px;
       padding-left: 5px;
       margin-top: 2px;
+      width: 100%;
     }
   }
 `;
