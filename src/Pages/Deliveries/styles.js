@@ -74,3 +74,10 @@ export const TopoActionArea = styled.div`
     }
   }
 `;
+
+export const ContainerComplete = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+`;
