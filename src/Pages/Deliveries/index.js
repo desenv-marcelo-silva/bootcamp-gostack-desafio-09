@@ -35,7 +35,7 @@ export default function Deliveries() {
 
       const dataDeliveries = response.data.map((item) => ({
         ...item,
-        initial: initials(item.Deliveryman.name),
+        initial: initials(item.Deliveryman.name).substring(0, 2),
         statusColor: getStatusColor(item.status),
       }));
 
