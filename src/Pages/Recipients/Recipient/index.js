@@ -37,7 +37,7 @@ export default function Recipient() {
     }
 
     load();
-  }, []);
+  }, [idRecipient]);
 
   // eslint-disable-next-line camelcase
   async function createData(recipientData) {

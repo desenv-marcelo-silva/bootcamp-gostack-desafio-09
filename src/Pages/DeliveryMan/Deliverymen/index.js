@@ -31,7 +31,7 @@ export default function Deliverymen() {
     }
 
     load();
-  }, []);
+  }, [idDeliveryman]);
 
   // eslint-disable-next-line camelcase
   async function createData({ name, email }) {
