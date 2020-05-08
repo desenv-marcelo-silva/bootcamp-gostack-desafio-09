@@ -19,15 +19,15 @@ const schema = Yup.object().shape({
 
 export default function Deliverymen() {
   const { idDeliveryman } = useParams();
-  const [nameValue, setNameValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
+  const [dataForm, setDataForm] = useState({});
 
   useEffect(() => {
     async function load() {
-      const response = await api.get(`/deliveryman/${idDeliveryman}`);
-      const { name, email } = response.data;
-      setNameValue(name);
-      setEmailValue(email);
+      if (idDeliveryman > 0) {
+        const response = await api.get(`/deliveryman/${idDeliveryman}`);
+        const { name, email } = response.data[0];
+        setDataForm({ name, email });
+      }
     }
 
     load();
@@ -87,7 +87,7 @@ export default function Deliverymen() {
   return (
     <Container>
       <FormArea>
-        <Form schema={schema} onSubmit={handleSubmit}>
+        <Form schema={schema} onSubmit={handleSubmit} initialData={dataForm}>
           <Topo>
             <h2>{`${
               idDeliveryman > 0 ? 'Alteração' : 'Cadastro'
@@ -106,19 +106,9 @@ export default function Deliverymen() {
 
           <div className="area-edicao">
             <label htmlFor="name">Nome</label>
-            <Input
-              type="text"
-              name="name"
-              value={nameValue}
-              onChange={(e) => setNameValue(e.target.value)}
-            />
+            <Input name="name" type="text" />
             <label htmlFor="deliveryman_id">e-Mail</label>
-            <Input
-              type="email"
-              name="email"
-              value={emailValue}
-              onChange={(e) => setEmailValue(e.target.value)}
-            />
+            <Input name="email" type="email" />
           </div>
         </Form>
       </FormArea>
