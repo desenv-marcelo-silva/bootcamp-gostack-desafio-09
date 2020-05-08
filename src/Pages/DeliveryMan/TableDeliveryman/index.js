@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -8,6 +8,26 @@ import { Container, MenuAction } from './styles';
 
 export default function TableDeliveryman({ dataTable }) {
   const [idDeliveryman, setIdDeliveryman] = useState(null);
+  const [showMenuAction, setShowMenuAction] = useState(true);
+  const menuRef = useRef(null);
+
+  function handleCloseMenuAction(e) {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setShowMenuAction(false);
+    }
+  }
+
+  function handleContextMenu(id) {
+    setIdDeliveryman(id === idDeliveryman ? null : id);
+    setShowMenuAction(true);
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleCloseMenuAction, true);
+    return () => {
+      document.removeEventListener('click', handleCloseMenuAction, true);
+    };
+  });
 
   function renderHeader() {
     return (
@@ -19,10 +39,6 @@ export default function TableDeliveryman({ dataTable }) {
         <th className="action">Ações</th>
       </tr>
     );
-  }
-
-  function handleContextMenu(id) {
-    setIdDeliveryman(id === idDeliveryman ? null : id);
   }
 
   function renderBody() {
@@ -46,7 +62,10 @@ export default function TableDeliveryman({ dataTable }) {
             <span>{email}</span>
           </td>
           <td className="action">
-            <MenuAction visible={id === idDeliveryman}>
+            <MenuAction
+              ref={menuRef}
+              visible={id === idDeliveryman && showMenuAction}
+            >
               <button type="button" onClick={() => handleContextMenu(id)}>
                 <MdMoreHoriz />
               </button>

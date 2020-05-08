@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { MdMoreHoriz, MdVisibility, MdDelete } from 'react-icons/md';
@@ -9,7 +9,27 @@ import { Container, MenuAction } from './styles';
 
 export default function TableProblem({ dataTable }) {
   const [idPackage, setIdPackage] = useState(0);
+  const [showMenuAction, setShowMenuAction] = useState(true);
   const [showVisualization, setShowVisualization] = useState(false);
+  const menuRef = useRef(null);
+
+  function handleCloseMenuAction(e) {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setShowMenuAction(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleCloseMenuAction, true);
+    return () => {
+      document.removeEventListener('click', handleCloseMenuAction, true);
+    };
+  });
+
+  function handleContextMenu(id) {
+    setShowMenuAction(true);
+    setIdPackage(id === idPackage ? 0 : id);
+  }
 
   function handleVisualization() {
     setShowVisualization(true);
@@ -29,10 +49,6 @@ export default function TableProblem({ dataTable }) {
     );
   }
 
-  function handleContextMenu(id) {
-    setIdPackage(id === idPackage ? 0 : id);
-  }
-
   function renderBody() {
     return dataTable.map((info, _) => {
       const { id, DeliveryProblem } = info;
@@ -44,7 +60,10 @@ export default function TableProblem({ dataTable }) {
             <span>{DeliveryProblem.description}</span>
           </td>
           <td className="action">
-            <MenuAction visible={id === idPackage}>
+            <MenuAction
+              ref={menuRef}
+              visible={id === idPackage && showMenuAction}
+            >
               <button type="button" onClick={() => handleContextMenu(id)}>
                 <MdMoreHoriz />
               </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +19,22 @@ export default function TableDelivery({ dataTable }) {
   const [idDelivery, setIdDelivery] = useState(0);
   const [idDeliveryman, setIdDeliveryman] = useState(0);
   const [showVisualization, setShowVisualization] = useState(false);
+  const [showMenuAction, setShowMenuAction] = useState(false);
+
+  const menuRef = useRef(null);
+
+  function handleCloseMenuAction(e) {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setShowMenuAction(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleCloseMenuAction, true);
+    return () => {
+      document.removeEventListener('click', handleCloseMenuAction, true);
+    };
+  });
 
   function renderHeader() {
     return (
@@ -37,6 +53,7 @@ export default function TableDelivery({ dataTable }) {
   function handleContextMenu(id, deliverymanId) {
     setIdDelivery(id === idDelivery ? 0 : id);
     setIdDeliveryman(deliverymanId);
+    setShowMenuAction(true);
   }
 
   function handleVisualization() {
@@ -89,7 +106,10 @@ export default function TableDelivery({ dataTable }) {
             <StatusDelivery statusColor={statusColor}>{status}</StatusDelivery>
           </div>
           <div className="action">
-            <MenuAction visible={id === idDelivery}>
+            <MenuAction
+              ref={menuRef}
+              visible={id === idDelivery && showMenuAction}
+            >
               <button
                 type="button"
                 onClick={() => handleContextMenu(id, deliverymanId)}
