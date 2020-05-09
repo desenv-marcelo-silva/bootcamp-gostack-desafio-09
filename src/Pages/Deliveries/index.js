@@ -18,7 +18,7 @@ export default function Deliveries() {
   const [data, setData] = useState([]);
 
   function getStatusColor(status) {
-    switch (status.toLowerCase().trim()) {
+    switch (status.trim().toLowerCase()) {
       case 'retirada':
         return '#4D85EE';
       case 'entregue':

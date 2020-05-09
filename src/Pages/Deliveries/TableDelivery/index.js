@@ -139,17 +139,20 @@ export default function TableDelivery({ dataTable, handleDelete }) {
                     <Link to={`/delivery/${idPackage}`}>Editar</Link>
                   </div>
                 </li>
-                <li>
-                  <div>
-                    <MdDelete color="#DE3B3B" />
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteDelivery(idPackage)}
-                    >
-                      Excluir
-                    </button>
-                  </div>
-                </li>
+                {(status.trim().toLowerCase() === 'pendente' ||
+                  status.trim().toLowerCase() === 'retirada') && (
+                  <li>
+                    <div>
+                      <MdDelete color="#DE3B3B" />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteDelivery(idPackage)}
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </li>
+                )}
               </ul>
             </MenuAction>
           </div>
