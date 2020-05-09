@@ -7,7 +7,7 @@ import VisualizationProblems from '../VisualizationProblems';
 
 import { Container, MenuAction } from './styles';
 
-export default function TableProblem({ dataTable }) {
+export default function TableProblem({ dataTable, handleDelete }) {
   const [idPackage, setIdPackage] = useState(0);
   const [showMenuAction, setShowMenuAction] = useState(true);
   const [showVisualization, setShowVisualization] = useState(false);
@@ -26,17 +26,16 @@ export default function TableProblem({ dataTable }) {
     };
   });
 
+  function handleCancel(id) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Confirma o cancelamento da encomenda?')) {
+      handleDelete(id);
+    }
+  }
+
   function handleContextMenu(id) {
     setShowMenuAction(true);
     setIdPackage(id === idPackage ? 0 : id);
-  }
-
-  function handleVisualization() {
-    setShowVisualization(true);
-  }
-
-  function handleCloseVisualization() {
-    setShowVisualization(false);
   }
 
   function renderHeader() {
@@ -71,7 +70,10 @@ export default function TableProblem({ dataTable }) {
                 <li>
                   <div>
                     <MdVisibility color="#4D85EE" />
-                    <button type="button" onClick={handleVisualization}>
+                    <button
+                      type="button"
+                      onClick={() => setShowVisualization(true)}
+                    >
                       Visualizar
                     </button>
                   </div>
@@ -79,7 +81,7 @@ export default function TableProblem({ dataTable }) {
                 <li>
                   <div>
                     <MdDelete color="#DE3B3B" />
-                    <button type="button" onClick={() => {}}>
+                    <button type="button" onClick={() => handleCancel(id)}>
                       Cancelar encomenda
                     </button>
                   </div>
@@ -97,7 +99,7 @@ export default function TableProblem({ dataTable }) {
       <VisualizationProblems
         idPackage={idPackage}
         visible={showVisualization}
-        handleCloseVisualizationProblems={handleCloseVisualization}
+        handleCloseVisualizationProblems={() => setShowVisualization(false)}
       />
       <table>
         <thead>{renderHeader()}</thead>
@@ -109,4 +111,5 @@ export default function TableProblem({ dataTable }) {
 
 TableProblem.propTypes = {
   dataTable: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
