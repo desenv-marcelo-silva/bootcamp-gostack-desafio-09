@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { MdMoreHoriz, MdEdit, MdDelete } from 'react-icons/md';
 import { Container, MenuAction } from './styles';
 
-export default function TableDeliveryman({ dataTable }) {
+export default function TableDeliveryman({ dataTable, handleDelete }) {
   const [idDeliveryman, setIdDeliveryman] = useState(null);
   const [showMenuAction, setShowMenuAction] = useState(true);
   const menuRef = useRef(null);
@@ -28,6 +28,13 @@ export default function TableDeliveryman({ dataTable }) {
       document.removeEventListener('click', handleCloseMenuAction, true);
     };
   });
+
+  function handleDeliveryDelete(id) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Confirma a exclusão do entregador?')) {
+      handleDelete(id);
+    }
+  }
 
   function renderHeader() {
     return (
@@ -79,7 +86,12 @@ export default function TableDeliveryman({ dataTable }) {
                 <li>
                   <div>
                     <MdDelete color="#DE3B3B" />
-                    <span>Excluir</span>
+                    <button
+                      type="button"
+                      onClick={() => handleDeliveryDelete(id)}
+                    >
+                      Excluir
+                    </button>
                   </div>
                 </li>
               </ul>
@@ -102,4 +114,5 @@ export default function TableDeliveryman({ dataTable }) {
 
 TableDeliveryman.propTypes = {
   dataTable: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };

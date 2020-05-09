@@ -120,7 +120,6 @@ export const MenuAction = styled.div`
     li {
       display: flex;
       justify-content: flex-start;
-      align-items: center;
 
       &:not(:last-child) {
         border-bottom: 1px solid #999;
@@ -129,27 +128,30 @@ export const MenuAction = styled.div`
       & > div {
         width: 100%;
         margin-bottom: 5px;
-        text-align: left;
         font-size: 16px;
         padding: 5px;
         margin: 5px;
         line-height: 20px;
+        display: flex;
+        align-items: center;
 
         &:hover {
           background-color: #ddd;
         }
+
+        svg {
+          margin-left: 0;
+          margin-right: 10px;
+          height: 15px;
+          width: 15px;
+        }
       }
 
-      span,
+      button,
       a {
         color: #999;
-      }
-
-      svg {
-        margin-left: 0;
-        margin-right: 10px;
-        height: 15px;
-        width: 15px;
+        width: 100px;
+        text-align: left;
       }
     }
   }

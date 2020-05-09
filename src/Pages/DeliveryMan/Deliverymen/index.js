@@ -76,12 +76,13 @@ export default function Deliverymen() {
     }
   }
 
-  function handleSubmit(params) {
+  async function handleSubmit(params) {
     if (Number(idDeliveryman) === 0) {
-      createData(params);
+      await createData(params);
     } else {
-      updateData(params);
+      await updateData(params);
     }
+    history.goBack();
   }
 
   return (
