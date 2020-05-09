@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { MdMoreHoriz, MdVisibility, MdEdit, MdDelete } from 'react-icons/md';
 import { getColor } from 'random-material-color';
 
+import { toast } from 'react-toastify';
+
 import Visualization from '../Visualization';
 
 import {
@@ -15,8 +17,8 @@ import {
   AvatarDeliveryman,
 } from './styles';
 
-export default function TableDelivery({ dataTable }) {
-  const [idDelivery, setIdDelivery] = useState(0);
+export default function TableDelivery({ dataTable, handleDelete }) {
+  const [idPackage, setidPackage] = useState(0);
   const [idDeliveryman, setIdDeliveryman] = useState(0);
   const [showVisualization, setShowVisualization] = useState(false);
   const [showMenuAction, setShowMenuAction] = useState(false);
@@ -51,17 +53,20 @@ export default function TableDelivery({ dataTable }) {
   }
 
   function handleContextMenu(id, deliverymanId) {
-    setIdDelivery(id === idDelivery ? 0 : id);
+    setidPackage(id === idPackage ? 0 : id);
     setIdDeliveryman(deliverymanId);
     setShowMenuAction(true);
   }
 
-  function handleVisualization() {
-    setShowVisualization(true);
-  }
-
-  function handleCloseVisualization() {
-    setShowVisualization(false);
+  function handleDeleteDelivery(id) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Confirma a exclusão da encomenda?')) {
+      if (handleDelete(id)) {
+        toast.success('Registro excluído com sucesso!');
+      } else {
+        toast.error('Registro não pôde ser excluído.');
+      }
+    }
   }
 
   function renderBody() {
@@ -108,7 +113,7 @@ export default function TableDelivery({ dataTable }) {
           <div className="action">
             <MenuAction
               ref={menuRef}
-              visible={id === idDelivery && showMenuAction}
+              visible={id === idPackage && showMenuAction}
             >
               <button
                 type="button"
@@ -120,7 +125,10 @@ export default function TableDelivery({ dataTable }) {
                 <li>
                   <div>
                     <MdVisibility color="#8E5BE8" />
-                    <button type="button" onClick={handleVisualization}>
+                    <button
+                      type="button"
+                      onClick={() => setShowVisualization(true)}
+                    >
                       Visualizar
                     </button>
                   </div>
@@ -128,13 +136,18 @@ export default function TableDelivery({ dataTable }) {
                 <li>
                   <div>
                     <MdEdit color="#4D85EE" />
-                    <Link to={`/delivery/${idDelivery}`}>Editar</Link>
+                    <Link to={`/delivery/${idPackage}`}>Editar</Link>
                   </div>
                 </li>
                 <li>
                   <div>
                     <MdDelete color="#DE3B3B" />
-                    <button type="button">Excluir</button>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteDelivery(idPackage)}
+                    >
+                      Excluir
+                    </button>
                   </div>
                 </li>
               </ul>
@@ -149,8 +162,8 @@ export default function TableDelivery({ dataTable }) {
     <Container>
       <Visualization
         visible={showVisualization}
-        handleCloseVisualization={handleCloseVisualization}
-        idDelivery={idDelivery}
+        handleCloseVisualization={() => setShowVisualization(false)}
+        idPackage={idPackage}
         idDeliveryman={idDeliveryman}
       />
       <ul className="table-header">
@@ -163,4 +176,5 @@ export default function TableDelivery({ dataTable }) {
 
 TableDelivery.propTypes = {
   dataTable: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };

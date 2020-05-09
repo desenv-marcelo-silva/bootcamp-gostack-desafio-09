@@ -46,6 +46,17 @@ export default function Deliveries() {
     loadDeliveries();
   }, []);
 
+  async function deleteDelivery(id) {
+    try {
+      await api.delete(`packages/${id}`);
+      const newData = data.filter((item) => item.id !== id);
+      setData(newData);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   return (
     <Container>
       <TitleActiveWork title="Gerenciando encomendas" />
@@ -75,7 +86,7 @@ export default function Deliveries() {
         </Link>
       </TopoActionArea>
 
-      <TableDelivery dataTable={data} />
+      <TableDelivery dataTable={data} handleDelete={deleteDelivery} />
     </Container>
   );
 }

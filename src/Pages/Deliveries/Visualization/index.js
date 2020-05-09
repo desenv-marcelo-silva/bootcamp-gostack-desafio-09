@@ -13,7 +13,7 @@ import {
 } from './styles';
 
 export default function Visualization({
-  idDelivery,
+  idPackage,
   idDeliveryman,
   visible,
   handleCloseVisualization,
@@ -24,14 +24,14 @@ export default function Visualization({
     async function loadInfo() {
       if (visible) {
         const response = await api.get(
-          `/deliverypacks/${idDeliveryman}/package/${idDelivery}`
+          `/deliverypacks/${idDeliveryman}/package/${idPackage}`
         );
 
         setInfo(response.data);
       }
     }
     loadInfo();
-  }, [idDeliveryman, idDelivery, visible]);
+  }, [idDeliveryman, idPackage, visible]);
 
   const { rua, numero, bairro, cidade, estado, cep } = info.Recipient || {};
 
@@ -105,7 +105,7 @@ export default function Visualization({
 }
 
 Visualization.propTypes = {
-  idDelivery: PropTypes.number.isRequired,
+  idPackage: PropTypes.number.isRequired,
   idDeliveryman: PropTypes.number.isRequired,
   visible: PropTypes.bool.isRequired,
   handleCloseVisualization: PropTypes.func.isRequired,
