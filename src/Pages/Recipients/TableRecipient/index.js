@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { MdMoreHoriz, MdEdit, MdDelete } from 'react-icons/md';
 import { Container, MenuAction } from './styles';
 
-export default function TableRecipient({ dataTable }) {
+export default function TableRecipient({ dataTable, handleDelete }) {
   const [idRecipient, setIdRecipient] = useState(null);
   const [showMenuAction, setShowMenuAction] = useState(true);
   const menuRef = useRef(null);
@@ -28,6 +28,13 @@ export default function TableRecipient({ dataTable }) {
       document.removeEventListener('click', handleCloseMenuAction, true);
     };
   });
+
+  function handleDeleteRecipient(id) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Confirma a exclusão do destinatário?')) {
+      handleDelete(id);
+    }
+  }
 
   function renderHeader() {
     return (
@@ -71,7 +78,12 @@ export default function TableRecipient({ dataTable }) {
                 <li>
                   <div>
                     <MdDelete color="#DE3B3B" />
-                    <span>Excluir</span>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteRecipient(idRecipient)}
+                    >
+                      Excluir
+                    </button>
                   </div>
                 </li>
               </ul>
@@ -94,4 +106,5 @@ export default function TableRecipient({ dataTable }) {
 
 TableRecipient.propTypes = {
   dataTable: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };

@@ -121,15 +121,18 @@ export const MenuAction = styled.div`
         padding: 5px;
         margin: 5px;
         line-height: 20px;
+        display: flex;
+        align-items: center;
 
         &:hover {
           background-color: #ddd;
         }
       }
 
-      span,
+      button,
       a {
         color: #999999;
+        text-align: left;
       }
 
       svg {
