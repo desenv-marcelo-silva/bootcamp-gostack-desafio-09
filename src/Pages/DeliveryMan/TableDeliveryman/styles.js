@@ -121,17 +121,28 @@ export const MenuAction = styled.div`
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      font-size: 16px;
-      padding: 5px;
-      margin: 5px;
-      line-height: 20px;
 
       &:not(:last-child) {
         border-bottom: 1px solid #999;
       }
 
-      span {
-        color: #999999;
+      & > div {
+        width: 100%;
+        margin-bottom: 5px;
+        text-align: left;
+        font-size: 16px;
+        padding: 5px;
+        margin: 5px;
+        line-height: 20px;
+
+        &:hover {
+          background-color: #ddd;
+        }
+      }
+
+      span,
+      a {
+        color: #999;
       }
 
       svg {
@@ -139,10 +150,6 @@ export const MenuAction = styled.div`
         margin-right: 10px;
         height: 15px;
         width: 15px;
-      }
-
-      &:hover {
-        background-color: #ddd;
       }
     }
   }

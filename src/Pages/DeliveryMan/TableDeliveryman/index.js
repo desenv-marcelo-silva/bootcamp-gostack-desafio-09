@@ -77,7 +77,10 @@ export default function TableDeliveryman({ dataTable }) {
                   </div>
                 </li>
                 <li>
-                  <MdDelete color="#DE3B3B" /> <span>Excluir</span>
+                  <div>
+                    <MdDelete color="#DE3B3B" />
+                    <span>Excluir</span>
+                  </div>
                 </li>
               </ul>
             </MenuAction>

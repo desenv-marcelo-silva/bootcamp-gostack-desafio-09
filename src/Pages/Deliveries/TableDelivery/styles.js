@@ -172,7 +172,8 @@ export const MenuAction = styled.div`
         line-height: 20px;
         width: 100%;
 
-        button {
+        button,
+        a {
           color: #999;
           width: unset;
         }
