@@ -11,7 +11,7 @@ import api from '../../services/api';
 import TableDelivery from './TableDelivery';
 
 import TitleActiveWork from '~/components/TitleActiveWork';
-import Autocomplete from '~/components/Autocomplete';
+
 import { Container, TopoActionArea, ContainerComplete } from './styles';
 
 export default function Deliveries() {
@@ -62,10 +62,6 @@ export default function Deliveries() {
       <TitleActiveWork title="Gerenciando encomendas" />
       <TopoActionArea>
         <ContainerComplete>
-          <Autocomplete
-            url="deliverypacks/deliveries"
-            placeHolder="Buscar por encomendas"
-          />
         </ContainerComplete>
         <Form onSubmit={() => {}}>
           <div>
