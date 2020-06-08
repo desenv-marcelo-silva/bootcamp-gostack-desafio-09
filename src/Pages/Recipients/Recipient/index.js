@@ -39,7 +39,6 @@ export default function Recipient() {
     load();
   }, [idRecipient]);
 
-  // eslint-disable-next-line camelcase
   async function createData(recipientData) {
     try {
       const response = await api.post('recipients', recipientData);
@@ -58,7 +57,6 @@ export default function Recipient() {
     }
   }
 
-  // eslint-disable-next-line camelcase
   async function updateData(recipientData) {
     try {
       const response = await api.put(`recipients`, {
