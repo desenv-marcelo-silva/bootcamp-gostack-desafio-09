@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdCheck } from 'react-icons/md';
-import { Form, Input, Select } from '@rocketseat/unform';
+import { Form, Input } from '@rocketseat/unform';
 import { useParams } from 'react-router-dom';
+import { Async } from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -25,38 +27,20 @@ const schema = Yup.object().shape({
 export default function Delivery() {
   const { idPackage } = useParams();
   const [recipients, setRecipients] = useState([]);
+  const [loadRecipient, setLoadRecipient] = useState(false);
   const [deliveryman, setDeliveryman] = useState([]);
-  const [deliverymanValue, setDeliverymanValue] = useState(-1);
-  const [recipientValue, setRecipientValue] = useState(-1);
+  const [loadDeliveryman, setloadDeliveryman] = useState(false);
+  const [deliverymanValue, setDeliverymanValue] = useState('');
+  const [recipientValue, setRecipientValue] = useState('');
   const [productValue, setProductValue] = useState('');
 
   useEffect(() => {
     async function load() {
-      const recipientData = await api.get('recipients');
-      const dataRcp = recipientData.data.map((recipient) => ({
-        id: recipient.id,
-        title: recipient.name,
-      }));
-
-      const deliverymanData = await api.get('deliveryman');
-      const dataDlv = deliverymanData.data.map((delvman) => ({
-        id: delvman.id,
-        title: delvman.name,
-      }));
-
       if (idPackage > 0) {
         const packageInfo = await api.get(`packages/package/${idPackage}`);
 
-        setDeliverymanValue(packageInfo.data.deliveryman_id);
-        setRecipientValue(packageInfo.data.recipient_id);
         setProductValue(packageInfo.data.product);
-      } else {
-        dataRcp.unshift({ id: -1, title: 'Selecione um destinatário...' });
-        dataDlv.unshift({ id: -1, title: 'Selecione um entregador...' });
       }
-
-      setRecipients(dataRcp);
-      setDeliveryman(dataDlv);
     }
 
     load();
@@ -116,6 +100,28 @@ export default function Delivery() {
     }
   }
 
+  async function getRecipient() {
+    setLoadRecipient(true);
+    const recipientData = await api.get(`recipients?q=${recipientValue}`);
+    const data = recipientData.data.map((recipient) => ({
+      value: recipient.id,
+      label: recipient.name,
+    }));
+    setRecipients([data]);
+    setLoadRecipient(false);
+  }
+
+  async function getDeliveryman() {
+    setloadDeliveryman(true);
+    const deliverymanData = await api.get(`deliveryman?q=${deliverymanValue}`);
+    const data = deliverymanData.data.map((delvman) => ({
+      value: delvman.id,
+      label: delvman.name,
+    }));
+    setDeliveryman([data]);
+    setloadDeliveryman(false);
+  }
+
   return (
     <Container>
       <FormArea>
@@ -140,22 +146,34 @@ export default function Delivery() {
             <div className="form-input-area-line-1">
               <label htmlFor="recipient_id">
                 Destinatário
-                <Select
+                <Async
                   name="recipient_id"
                   value={recipientValue}
-                  defaultValue
-                  options={recipients}
+                  isLoading={loadRecipient}
+                  valueKey="id"
+                  labelKey="value"
+                  loadOptions={getRecipient}
+                  placeholder="Selecione o destinatário"
+                  loadingPlaceholder="Carregando destinatário..."
+                  clearValueText="Limpar"
+                  noResultsText="Nenhum entregador encontrado."
                   onChange={(e) => setRecipientValue(e.target.value)}
                 />
               </label>
 
               <label htmlFor="deliveryman_id">
                 Entregador
-                <Select
+                <Async
                   name="deliveryman_id"
                   value={deliverymanValue}
-                  defaultValue={{ deliverymanValue }}
-                  options={deliveryman}
+                  isLoading={loadDeliveryman}
+                  valueKey="id"
+                  labelKey="value"
+                  loadOptions={getDeliveryman}
+                  placeholder="Selecione o entregador"
+                  loadingPlaceholder="Carregando entregador..."
+                  clearValueText="Limpar"
+                  noResultsText="Nenhum entregador encontrado."
                   onChange={(e) => setDeliverymanValue(e.target.value)}
                 />
               </label>
