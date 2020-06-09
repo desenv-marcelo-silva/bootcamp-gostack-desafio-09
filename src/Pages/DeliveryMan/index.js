@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Form } from '@rocketseat/unform';
 import { MdSearch, MdAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import initials from 'initials';
@@ -10,10 +9,11 @@ import api from '../../services/api';
 import TableDeliveryman from './TableDeliveryman';
 import TitleActiveWork from '~/components/TitleActiveWork';
 
-import { Container, TopoForm } from './styles';
+import { Container, TopoForm, ContainerBusca, InputBusca } from './styles';
 
 export default function Deliveryman() {
   const [data, setData] = useState([]);
+  const [filtro, setFiltro] = useState('');
 
   async function loadDeliveryman() {
     const response = await api.get('/deliveryman');
@@ -51,22 +51,35 @@ export default function Deliveryman() {
     }
   }
 
+  useEffect(() => {
+    async function loadFilter() {
+      const response = await api.get(`/deliveryman?q=${filtro}`);
+      const dataDeliveryman = response.data.map((item) => ({
+        ...item,
+        initial: initials(item.name).substring(0, 2),
+      }));
+
+      setData(dataDeliveryman);
+    }
+
+    loadFilter();
+  }, [filtro]);
+
   return (
     <Container>
       <TitleActiveWork title="Gerenciando entregadores" />
       <TopoForm>
-        <Form onSubmit={() => {}}>
-          <div>
-            <span>
-              <MdSearch />
-            </span>
-            <Input
-              type="text"
-              name="filtro"
-              placeholder="Buscar por entregadores"
-            />
-          </div>
-        </Form>
+        <ContainerBusca>
+          <span>
+            <MdSearch />
+          </span>
+          <InputBusca
+            type="text"
+            name="filtro"
+            onChange={(e) => setFiltro(e.target.value)}
+            placeholder="Buscar por entregadores"
+          />
+        </ContainerBusca>
 
         <Link to="/deliverymen/0">
           <MdAdd />
@@ -74,10 +87,14 @@ export default function Deliveryman() {
         </Link>
       </TopoForm>
 
-      <TableDeliveryman
-        dataTable={data}
-        handleDelete={handleDeleteDeliveryman}
-      />
+      {data.length > 0 ? (
+        <TableDeliveryman
+          dataTable={data}
+          handleDelete={handleDeleteDeliveryman}
+        />
+      ) : (
+        <h3>Nenhum registro encontrado</h3>
+      )}
     </Container>
   );
 }
