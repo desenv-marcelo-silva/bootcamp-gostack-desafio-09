@@ -11,42 +11,6 @@ export const TopoActionArea = styled.div`
   align-items: center;
   margin-top: 25px;
 
-  form {
-    div {
-      display: flex;
-      align-items: center;
-
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      width: 240px;
-      padding: 4px;
-
-      span {
-        margin-left: 5px;
-        margin-right: 10px;
-
-        color: #999;
-      }
-
-      svg {
-        height: 18px;
-        width: 18px;
-      }
-
-      input {
-        font-size: 14px;
-        height: 20px;
-
-        border: 0;
-
-        &::placeholder {
-          color: #999;
-        }
-      }
-    }
-  }
-
   a {
     display: flex;
     align-items: center;
@@ -77,7 +41,34 @@ export const TopoActionArea = styled.div`
 
 export const ContainerComplete = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 200px;
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 240px;
+  padding: 4px;
+
+  span {
+    margin-left: 5px;
+    margin-right: 10px;
+
+    color: #999;
+  }
+
+  svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  input {
+    font-size: 14px;
+    height: 20px;
+
+    border: 0;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
 `;

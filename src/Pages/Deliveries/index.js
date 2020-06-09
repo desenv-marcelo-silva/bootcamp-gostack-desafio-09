@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Form, Input } from '@rocketseat/unform';
 import { MdSearch, MdAdd } from 'react-icons/md';
+import { DebounceInput } from 'react-debounce-input';
 
 import initials from 'initials';
 
@@ -16,6 +16,7 @@ import { Container, TopoActionArea, ContainerComplete } from './styles';
 
 export default function Deliveries() {
   const [data, setData] = useState([]);
+  const [filtro, setFiltro] = useState('');
 
   function getStatusColor(status) {
     switch (status.trim().toLowerCase()) {
@@ -57,24 +58,37 @@ export default function Deliveries() {
     }
   }
 
+  useEffect(() => {
+    async function searchDelivery() {
+      const response = await api.get(`deliverypacks/deliveries?q=${filtro}`);
+
+      const dataDeliveries = response.data.map((item) => ({
+        ...item,
+        initial: initials(item.Deliveryman.name).substring(0, 2),
+        statusColor: getStatusColor(item.status),
+      }));
+
+      setData(dataDeliveries);
+    }
+
+    searchDelivery();
+  }, [filtro]);
+
   return (
     <Container>
       <TitleActiveWork title="Gerenciando encomendas" />
       <TopoActionArea>
         <ContainerComplete>
+          <span>
+            <MdSearch />
+          </span>
+          <DebounceInput
+            minLength={3}
+            debounceTimeout={300}
+            placeholder="Buscar por encomendas"
+            onChange={(e) => setFiltro(e.target.value)}
+          />
         </ContainerComplete>
-        <Form onSubmit={() => {}}>
-          <div>
-            <span>
-              <MdSearch />
-            </span>
-            <Input
-              type="text"
-              name="filtro"
-              placeholder="Buscar por encomendas"
-            />
-          </div>
-        </Form>
 
         <Link to="/delivery/0">
           <MdAdd />
