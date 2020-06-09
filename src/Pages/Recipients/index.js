@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Input, Form } from '@rocketseat/unform';
 import { MdSearch, MdAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -24,7 +24,7 @@ export default function Recipients() {
     return address;
   }
 
-  async function loadRecipient() {
+  const loadRecipient = useCallback(async () => {
     const response = await api.get('/recipients');
 
     const dataRecipient = response.data.map((item) => ({
@@ -33,11 +33,11 @@ export default function Recipients() {
     }));
 
     setData(dataRecipient);
-  }
+  }, []);
 
   useEffect(() => {
     loadRecipient();
-  }, []);
+  }, [loadRecipient]);
 
   async function handleDeleteRecipient(id) {
     try {
