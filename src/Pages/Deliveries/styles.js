@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+
+  h3 {
+    margin: 200px 0;
+    text-align: center;
+  }
 `;
 
 export const TopoActionArea = styled.div`

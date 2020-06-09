@@ -96,7 +96,11 @@ export default function Deliveries() {
         </Link>
       </TopoActionArea>
 
-      <TableDelivery dataTable={data} handleDelete={deleteDelivery} />
+      {data.length > 0 ? (
+        <TableDelivery dataTable={data} handleDelete={deleteDelivery} />
+      ) : (
+        <h3>Nenhum registro encontrado</h3>
+      )}
     </Container>
   );
 }
